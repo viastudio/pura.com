@@ -7,6 +7,22 @@ var Route = ReactRouter.Route;
 var Navigation = ReactRouter.Navigation;
 var createBrowserHistory = require('history/lib/createBrowserHistory');
 
+
+/*
+* App
+*/
+var App = React.createClass({
+
+    render: function () {
+        return (
+            <div className="page">
+                <Header />
+                <Footer />
+            </div>
+        )
+    }
+});
+
 /*
 * Header
 */
@@ -14,16 +30,32 @@ var Header = React.createClass({
 
     render: function () {
         return (
-            <header id="masthead" class="site-header" role="banner">
-                <div class="container">
-                    <nav class="menu-nav">
-                        <button type="button" class="menu-button" href="#"><span class="sr-only">Open Menu</span><i class="fa fa-bars"></i></button>
+            <header id="masthead" className="site-header" role="banner">
+                <div className="container">
+                    <nav className="menu-nav">
+                        <button type="button" className="menu-button" href="#"><span className="sr-only">Open Menu</span><i className="fa fa-bars"></i></button>
                     </nav>
-                    <div class="site-branding">
-                        <h1 class="site-title"><a href="/" rel="home">api.pura.com</a></h1>
+                    <div className="site-branding">
+                        <h1 className="site-title"><a href="/" rel="home">api.pura.com</a></h1>
                     </div>
                 </div>
             </header>
+        )
+    }
+});
+
+/*
+* Footer
+*/
+var Footer = React.createClass({
+
+    render: function () {
+        return (
+             <footer id="colophon" className="site-footer" role="contentinfo">
+                <div className="container">
+                    Built by VIA Studio
+                </div>
+            </footer>
         )
     }
 });
@@ -47,7 +79,7 @@ var Foo = React.createClass({
 */
 var routes = (
     <Router history={createBrowserHistory()}>
-        <Route path="/" component={Header} />
+        <Route path="/" component={App} />
         <Route path="/foo" component={Foo} />
 
     </Router>
