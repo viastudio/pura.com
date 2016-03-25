@@ -8,6 +8,7 @@ var notify = require('gulp-notify');
 
 var less = require('gulp-less');
 var path = require('path');
+var concat = require('gulp-concat');
 
 var autoprefixer = require('gulp-autoprefixer');
 var uglify = require('gulp-uglify');
@@ -28,6 +29,7 @@ gulp.task('less', function () {
     .pipe(less({
       paths: [ path.join(__dirname, 'less', 'includes') ]
     }))
+    .pipe(concat('style.min.css'))
     .pipe(gulp.dest('./webroot/build/css'));
 });
 
