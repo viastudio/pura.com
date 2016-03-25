@@ -2,4 +2,6 @@
 /cache/
 
 node_modules
+/webroot/build
+/webroot/res/components
 
