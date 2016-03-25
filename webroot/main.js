@@ -50,7 +50,7 @@ var Foo = React.createClass({
 * Routes
 */
 var routes = (
-    <Router history={createBrowserHistory()}>
+    <Router>
         <Route path="/" component={App}>
             <IndexRoute component={FrontPage} />
             <Route path="/blog" component={Blog}  />
