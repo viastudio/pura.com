@@ -6,7 +6,9 @@ var babelify = require('babelify');
 var watchify = require('watchify');
 var notify = require('gulp-notify');
 
-var stylus = require('gulp-stylus');
+var less = require('gulp-less');
+var path = require('path');
+
 var autoprefixer = require('gulp-autoprefixer');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
@@ -21,17 +23,13 @@ var historyApiFallback = require('connect-history-api-fallback')
   Styles Task
 */
 
-// gulp.task('styles', function() {
-
-//   gulp.src('css/fonts/**.*')
-//     .pipe(gulp.dest('build/css/fonts'))
-
-//   gulp.src('css/style.styl')
-//     .pipe(stylus())
-//     .pipe(autoprefixer())
-//     .pipe(gulp.dest('./build/css/'))
-//     .pipe(reload({stream:true}))
-// });
+gulp.task('less', function () {
+  return gulp.src('./webroot/res/less/**/*.less')
+    .pipe(less({
+      paths: [ path.join(__dirname, 'less', 'includes') ]
+    }))
+    .pipe(gulp.dest('./webroot/build/css'));
+});
 
 
 function handleErrors() {
@@ -45,7 +43,7 @@ function handleErrors() {
 
 function buildScript(file, watch) {
     var props = {
-        entries: ['./webroot/app/' + file],
+        entries: ['./webroot/' + file],
         debug : true,
         cache: {},
         packageCache: {},
@@ -60,7 +58,7 @@ function buildScript(file, watch) {
         return stream
         .on('error', handleErrors)
         .pipe(source(file))
-        .pipe(gulp.dest('./webroot/build/'))
+        .pipe(gulp.dest('./webroot/build/js/'))
         // If you also want to uglify it
         // .pipe(buffer())
         // .pipe(uglify())
