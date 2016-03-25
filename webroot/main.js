@@ -1,6 +1,15 @@
 var React = require('react');
 var ReactDOM = require('react-dom')
 
+var ReactRouter = require('react-router');
+var Router  = ReactRouter.Router;
+var Route = ReactRouter.Route;
+var Navigation = ReactRouter.Navigation;
+var createBrowserHistory = require('history/lib/createBrowserHistory');
+
+/*
+* Header
+*/
 var Header = React.createClass({
 
     render: function () {
@@ -19,4 +28,29 @@ var Header = React.createClass({
     }
 });
 
-ReactDOM.render(<Header />, document.querySelector('#main'));
+/*
+* Foo
+*/
+var Foo = React.createClass({
+
+    render: function () {
+        return (
+            <p>
+                Bar
+            </p>
+        )
+    }
+});
+
+/*
+* Routes
+*/
+var routes = (
+    <Router history={createBrowserHistory()}>
+        <Route path="/" component={Header} />
+        <Route path="/foo" component={Foo} />
+
+    </Router>
+)
+
+ReactDOM.render(routes, document.querySelector('#main'));
