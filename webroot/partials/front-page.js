@@ -7,24 +7,25 @@ import request from 'superagent';
 import Page from './page';
 
 var FrontPage = React.createClass({
- componentWillMount: function () {
-    var self = this;
-    // console.log(self);
-     request
-         .get('http://api.pura.joel.boom/wp-json/wp/v2/pages/6')
-         .end(function(err, res) {
-             var data = JSON.parse(res.text);
+    getInitialState: function() {
+        return { component: <div /> };
+    },
 
-             self.setState({ component: <Page data={ data } bodyClass="index" /> });
-         });
- },
+    componentWillMount: function () {
+        var self = this;
+        // console.log(self);
+        request
+            .get('http://api.pura.joel.boom/wp-json/wp/v2/pages/6')
+            .end(function(err, res) {
+                var data = JSON.parse(res.text);
 
- render: function () {
-    if (this.state) {
+                self.setState({ component: <Page data={ data } bodyClass="index" /> });
+            });
+    },
+
+    render: function () {
         return this.state.component;
     }
-    return <div />
- }
 });
 
 export default FrontPage;
