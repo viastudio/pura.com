@@ -8,20 +8,19 @@ var Loop = React.createClass({
 
  render: function () {
     var posts = this.props.data;
-    console.log(posts);
-    if (posts) {
+        return (
+            <div>
+                {posts.map(function(post) {
+                    function createExcerpt() { return {__html: post.excerpt.rendered}; };
+                    return <div key={post.title.rendered}>
+                                <h2>{post.title.rendered}</h2>
+                                <div dangerouslySetInnerHTML={createExcerpt()} />
+                            </div>
+                })}
+            </div>
+        )
 
-     return (
-        <div>
-         posts go here
-        </div>
-     )
     }
-
-    return (
-        <div />
-    )
- }
 });
 
 export default Loop;
