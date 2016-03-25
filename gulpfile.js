@@ -12,8 +12,8 @@ var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var buffer = require('vinyl-buffer');
 
-var browserSync = require('browser-sync');
-var reload = browserSync.reload;
+// var browserSync = require('browser-sync');
+// var reload = browserSync.reload;
 var historyApiFallback = require('connect-history-api-fallback')
 
 
@@ -60,13 +60,13 @@ function buildScript(file, watch) {
         return stream
         .on('error', handleErrors)
         .pipe(source(file))
-        .pipe(gulp.dest('./build/'))
+        .pipe(gulp.dest('./webroot/build/'))
         // If you also want to uglify it
         // .pipe(buffer())
         // .pipe(uglify())
         // .pipe(rename('app.min.js'))
         // .pipe(gulp.dest('./build'))
-        .pipe(reload({stream:true}))
+        // .pipe(reload({stream:true}))
     }
 
     // listen for an update and run rebundle
@@ -80,11 +80,11 @@ function buildScript(file, watch) {
 }
 
 gulp.task('scripts', function() {
-    return buildScript('/webroot/app/main.js', false); // this will run once because we set watch to false
+    return buildScript('main.js', false); // this will run once because we set watch to false
 });
 
 // run 'scripts' task first, then watch for future changes
 gulp.task('default', ['scripts'], function() {
     //gulp.watch('css/**/*', ['styles']); // gulp watch for stylus changes
-    return buildScript('/webroot/app/main.js', true); // browserify watch for JS changes
+    return buildScript('main.js', true); // browserify watch for JS changes
 });
