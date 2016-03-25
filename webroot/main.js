@@ -1,5 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom')
+var request = require('superagent');
 
 var ReactRouter = require('react-router');
 var Router  = ReactRouter.Router;
@@ -75,13 +76,35 @@ var Foo = React.createClass({
 });
 
 /*
+* FrontPage
+*/
+var FrontPage = React.createClass({
+    componentDidMount: function () {
+        request
+            .get('http://api.pura.joel.boom/wp-json/wp/v2/pages/6')
+            .end(function(err, res) {
+                var data = JSON.parse(res.text);
+                self.setState({ component: <Content data={ data } bodyClass="index" /> });
+            });
+    },
+
+    render: function () {
+        return (
+            <p>
+                FrontPages
+            </p>
+        )
+    }
+});
+
+/*
 * Routes
 */
 var routes = (
     <Router history={createBrowserHistory()}>
         <Route path="/" component={App} />
         <Route path="/foo" component={Foo} />
-
+        <Route path="/front-page" component={FrontPage} />
     </Router>
 )
 
