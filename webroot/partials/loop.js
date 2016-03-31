@@ -13,7 +13,7 @@ var Loop = React.createClass({
                 {posts.map(function(post) {
                     function createExcerpt() { return {__html: post.excerpt.rendered}; };
                     return <div key={post.title.rendered}>
-                                <h2>{post.title.rendered}</h2>
+                                <h2><a href={'/blog/' + post.id}>{post.title.rendered}</a></h2>
                                 <div dangerouslySetInnerHTML={createExcerpt()} />
                             </div>
                 })}

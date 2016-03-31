@@ -53,7 +53,7 @@ var routes = (
     <Router>
         <Route path="/" component={App}>
             <IndexRoute component={FrontPage} />
-            <Route path="/blog" component={Blog}  />
+            <Route path="/blog" component={Blog} />
         </Route>
     </Router>
 )
