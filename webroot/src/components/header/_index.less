@@ -1,0 +1,27 @@
+#masthead {
+    background: @black;
+    color: @white;
+
+    .make-row;
+
+    .site-branding {
+        .make-sm-column(12);
+    }
+
+    .site-branding {
+        display: inline-block;
+
+        .site-description {
+            display: none;
+        }
+    }
+    .respond(@screen-sm, {
+        background: none;
+        .site-branding {
+            display: block;
+            .site-description {
+                display: block;
+            }
+        }
+    });
+}

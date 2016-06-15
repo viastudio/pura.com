@@ -1,4 +1,4 @@
 {
-    "directory": "webroot/res/components",
+    "directory": "webroot/src/lib",
     "analytics": false
 }

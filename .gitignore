@@ -1,7 +1,5 @@
-# Project
-/cache/
-
+.DS_Store
 node_modules
-/webroot/build
-/webroot/res/components
-
+webroot/build
+webroot/src/lib
+webroot/dist
