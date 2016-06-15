@@ -9,10 +9,10 @@ var IndexRoute = ReactRouter.IndexRoute;
 var Navigation = ReactRouter.Navigation;
 var createBrowserHistory = require('history/lib/createBrowserHistory');
 
-import Header from './partials/header';
-import Footer from './partials/footer';
-import FrontPage from './partials/front-page';
-import Blog from './partials/blog';
+import Header from '../components/header';
+import Footer from '../components/footer';
+import FrontPage from '../components/front_page';
+import Blog from '../components/blog';
 
 /*
 * App
@@ -28,20 +28,6 @@ var App = React.createClass({
                 </main>
                 <Footer />
             </div>
-        )
-    }
-});
-
-/*
-* Foo
-*/
-var Foo = React.createClass({
-
-    render: function () {
-        return (
-            <p>
-                Bar
-            </p>
         )
     }
 });

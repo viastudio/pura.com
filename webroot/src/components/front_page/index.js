@@ -1,23 +1,25 @@
 /*
-  Blog
-  <Blog/>
+  FrontPage
+  <FrontPage/>
 */
 import React from 'react';
 import request from 'superagent';
-import Loop from './loop';
+import Page from '../elements/page';
 
-var Blog = React.createClass({
+var FrontPage = React.createClass({
     getInitialState: function() {
         return { component: <div /> };
     },
+
     componentWillMount: function () {
         var self = this;
+        // console.log(self);
         request
-            .get('http://api.pura.joel.boom/wp-json/wp/v2/posts')
+            .get('http://api.pura.joel.boom/wp-json/wp/v2/pages/6')
             .end(function(err, res) {
                 var data = JSON.parse(res.text);
 
-                self.setState({ component: <Loop data={ data } bodyClass="blog" /> });
+                self.setState({ component: <Page data={ data } bodyClass="index" /> });
             });
     },
 
@@ -26,4 +28,4 @@ var Blog = React.createClass({
     }
 });
 
-export default Blog;
+export default FrontPage;

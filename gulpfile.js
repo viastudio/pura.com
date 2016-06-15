@@ -5,34 +5,21 @@ var browserify = require('browserify');
 var babelify = require('babelify');
 var watchify = require('watchify');
 var notify = require('gulp-notify');
-
 var less = require('gulp-less');
 var path = require('path');
 var concat = require('gulp-concat');
-
 var autoprefixer = require('gulp-autoprefixer');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var buffer = require('vinyl-buffer');
-
-// var browserSync = require('browser-sync');
-// var reload = browserSync.reload;
-var historyApiFallback = require('connect-history-api-fallback')
-
-
-/*
-  Styles Task
-*/
+var historyApiFallback = require('connect-history-api-fallback');
 
 gulp.task('less', function () {
-  return gulp.src('./webroot/res/less/**/*.less')
-    .pipe(less({
-      paths: [ path.join(__dirname, 'less', 'includes') ]
-    }))
-    .pipe(concat('style.min.css'))
-    .pipe(gulp.dest('./webroot/build/css'));
+    return gulp.src('webroot/src/app/index.less')
+        .pipe(less())
+        .pipe(concat('index.css'))
+        .pipe(gulp.dest('webroot/dist/webroot/src/app/'));
 });
-
 
 function handleErrors() {
     var args = Array.prototype.slice.call(arguments);
@@ -45,32 +32,26 @@ function handleErrors() {
 
 function buildScript(file, watch) {
     var props = {
-        entries: ['./webroot/' + file],
+        entries: [file],
         debug : true,
         cache: {},
         packageCache: {},
         transform:  [babelify.configure({stage : 0 })]
     };
 
-  // watchify() if watch requested, otherwise run browserify() once
-  var bundler = watch ? watchify(browserify(props)) : browserify(props);
+    // watchify() if watch requested, otherwise run browserify() once
+    var bundler = watch ? watchify(browserify(props)) : browserify(props);
 
     function rebundle() {
         var stream = bundler.bundle();
         return stream
         .on('error', handleErrors)
         .pipe(source(file))
-        .pipe(gulp.dest('./webroot/build/js/'))
-        // If you also want to uglify it
-        // .pipe(buffer())
-        // .pipe(uglify())
-        // .pipe(rename('app.min.js'))
-        // .pipe(gulp.dest('./build'))
-        // .pipe(reload({stream:true}))
+        .pipe(gulp.dest('webroot/dist/'));
     }
 
     // listen for an update and run rebundle
-    bundler.on('update', function() {
+    bundler.on('update', function () {
         rebundle();
         gutil.log('Rebundle...');
     });
@@ -79,12 +60,11 @@ function buildScript(file, watch) {
     return rebundle();
 }
 
-gulp.task('scripts', function() {
-    return buildScript('main.js', false); // this will run once because we set watch to false
+gulp.task('scripts', function () {
+    return buildScript('webroot/src/app/index.js', false); // this will run once because we set watch to false
 });
 
-// run 'scripts' task first, then watch for future changes
-gulp.task('default', ['scripts'], function() {
-    //gulp.watch('css/**/*', ['styles']); // gulp watch for stylus changes
-    return buildScript('main.js', true); // browserify watch for JS changes
+gulp.task('default', function () {
+    gulp.watch('webroot/src/**/*.less', ['less']);
+    return buildScript('webroot/src/app/index.js', true);
 });

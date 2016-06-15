@@ -4,7 +4,7 @@
 */
 
 import React from 'react';
-import PrimaryNav from './primary-nav';
+import PrimaryNav from '../elements/primary_navigation';
 
 var Header = React.createClass({
 
