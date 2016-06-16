@@ -9,10 +9,10 @@ var IndexRoute = ReactRouter.IndexRoute;
 var Navigation = ReactRouter.Navigation;
 var createBrowserHistory = require('history/lib/createBrowserHistory');
 
-import Header from '../components/header';
-import Footer from '../components/footer';
-import FrontPage from '../components/front_page';
-import Blog from '../components/blog';
+import Header from './components/header';
+import Footer from './components/footer';
+import FrontPage from './components/front_page';
+import Blog from './components/blog';
 
 /*
 * App

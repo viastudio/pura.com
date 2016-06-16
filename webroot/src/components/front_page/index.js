@@ -13,7 +13,7 @@ var FrontPage = React.createClass({
 
     componentWillMount: function () {
         var self = this;
-        // console.log(self);
+        console.log(self);
         request
             .get('http://api.pura.joel.boom/wp-json/wp/v2/pages/6')
             .end(function(err, res) {
