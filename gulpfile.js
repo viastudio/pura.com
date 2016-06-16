@@ -26,7 +26,7 @@ gulp.task('styles', function () {
             browsers: ['last 2 versions']}
         ))
         .pipe(concat('index.css'))
-        .pipe(gulp.dest('webroot/dist/webroot/src/app/'));
+        .pipe(gulp.dest('webroot/dist/'));
 });
 
 function buildScript(file, watch) {
@@ -43,7 +43,7 @@ function buildScript(file, watch) {
     function rebundle() {
         var stream = bundler.bundle();
         return stream
-        .pipe(source(file))
+        .pipe(source('index.js'))
         .pipe(gulp.dest('webroot/dist/'));
     }
 
