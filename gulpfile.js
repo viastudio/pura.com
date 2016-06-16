@@ -4,7 +4,6 @@ var gutil = require('gulp-util');
 var browserify = require('browserify');
 var babelify = require('babelify');
 var watchify = require('watchify');
-
 var less = require('gulp-less');
 var path = require('path');
 var concat = require('gulp-concat');
@@ -15,8 +14,13 @@ var buffer = require('vinyl-buffer');
 var sourcemaps = require('gulp-sourcemaps');
 
 var paths = {
-    scripts: ['webroot/src/app/index.js'],
-    styles: ['webroot/src/app/index.less']
+    scripts: ['webroot/src/index.js'],
+    styles: ['webroot/src/index.less']
+};
+
+var mapOptions = {
+    includeContent: false,
+    sourceRoot: '../../source/webroot/src'
 };
 
 var bundle = (files, watch) => {
@@ -26,14 +30,18 @@ var bundle = (files, watch) => {
         cache: {},
         packageCache: {},
         transform: [
-            babelify.configure({stage : 0 })
+            babelify.configure({stage: 0})
         ]
     };
 
     var bundler = watch ? watchify(browserify(props)) : browserify(props);
     var rebundle = () => {
-        return bundler.bundle()
+        return bundler
+            .bundle()
             .pipe(source('index.js'))
+            .pipe(buffer())
+            .pipe(sourcemaps.init({loadMaps: true}))
+            .pipe(sourcemaps.write(mapOptions))
             .pipe(gulp.dest('webroot/dist/'));
     };
 
@@ -46,19 +54,20 @@ var bundle = (files, watch) => {
 };
 
 gulp.task('styles', () => {
-    return gulp.src(paths.styles)
+    return gulp
+        .src(paths.styles)
         .pipe(sourcemaps.init())
         .pipe(less())
         .pipe(autoprefixer({
-            browsers: ['last 2 versions']}
-        ))
+            browsers: ['last 2 versions']
+        }))
         .pipe(concat('index.css'))
-        .pipe(sourcemaps.write())
+        .pipe(sourcemaps.write(mapOptions))
         .pipe(gulp.dest('webroot/dist/'));
 });
 
 gulp.task('scripts', () => {
-    return buildScript(paths.scripts, false);
+    return bundle(paths.scripts, false);
 });
 
 gulp.task('watch', () => {
