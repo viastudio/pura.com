@@ -12,10 +12,11 @@ var autoprefixer = require('gulp-autoprefixer');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var buffer = require('vinyl-buffer');
+var sourcemaps = require('gulp-sourcemaps');
 
 var paths = {
     scripts: ['webroot/src/app/index.js'],
-    styles: ['webroot/src/**/*.less']
+    styles: ['webroot/src/app/index.less']
 };
 
 var bundle = (files, watch) => {
@@ -46,11 +47,13 @@ var bundle = (files, watch) => {
 
 gulp.task('styles', () => {
     return gulp.src(paths.styles)
+        .pipe(sourcemaps.init())
         .pipe(less())
         .pipe(autoprefixer({
             browsers: ['last 2 versions']}
         ))
         .pipe(concat('index.css'))
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest('webroot/dist/'));
 });
 

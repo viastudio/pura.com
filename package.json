@@ -6,6 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/viastudio/pura.com"
+  },
+  "description": "A React.js powered WordPress theme.",
   "author": "VIA Studio",
   "license": "ISC",
   "dependencies": {
@@ -20,6 +25,7 @@
     "gulp-concat": "^2.6.0",
     "gulp-less": "^3.0.5",
     "gulp-rename": "1.2.2",
+    "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "1.4.2",
     "gulp-util": "3.0.7",
     "history": "1.12.5",
