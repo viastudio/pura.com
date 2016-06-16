@@ -16,6 +16,7 @@ var buffer = require('vinyl-buffer');
 
 var paths = {
     scripts: 'webroot/src/app/index.js',
+    components: 'webroot/src/components/**/*.js',
     styles: 'webroot/src/**/*.less'
 };
 
@@ -56,10 +57,13 @@ function buildScript(file, watch) {
 }
 
 gulp.task('scripts', function () {
-    return buildScript(paths.scripts, true);
-});
-gulp.task('watch', function() {
-    gulp.watch(paths.styles, ['styles']);
+    return buildScript(paths.scripts, false);
 });
 
-gulp.task('default', ['scripts', 'styles', 'watch']);
+gulp.task('watch', function() {
+    gulp.watch(paths.styles, ['styles']);
+    gulp.watch(paths.scripts, ['scripts']);
+    gulp.watch(paths.components, ['scripts']);
+});
+
+gulp.task('default', ['scripts', 'styles']);
