@@ -13,14 +13,38 @@ var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var buffer = require('vinyl-buffer');
 
-
 var paths = {
-    scripts: 'webroot/src/app/index.js',
-    components: 'webroot/src/components/**/*.js',
-    styles: 'webroot/src/**/*.less'
+    scripts: ['webroot/src/app/index.js'],
+    styles: ['webroot/src/**/*.less']
 };
 
-gulp.task('styles', function () {
+var bundle = (files, watch) => {
+    var props = {
+        entries: files,
+        debug : true,
+        cache: {},
+        packageCache: {},
+        transform: [
+            babelify.configure({stage : 0 })
+        ]
+    };
+
+    var bundler = watch ? watchify(browserify(props)) : browserify(props);
+    var rebundle = () => {
+        return bundler.bundle()
+            .pipe(source('index.js'))
+            .pipe(gulp.dest('webroot/dist/'));
+    };
+
+    bundler.on('update', (ids) => {
+        rebundle();
+        gutil.log('Updated', gutil.colors.cyan(ids));
+    });
+
+    return rebundle();
+};
+
+gulp.task('styles', () => {
     return gulp.src(paths.styles)
         .pipe(less())
         .pipe(autoprefixer({
@@ -30,40 +54,13 @@ gulp.task('styles', function () {
         .pipe(gulp.dest('webroot/dist/'));
 });
 
-function buildScript(file, watch) {
-    var props = {
-        entries: [file],
-        debug : true,
-        cache: {},
-        packageCache: {},
-        transform:  [babelify.configure({stage : 0 })]
-    };
-    // watchify() if watch requested, otherwise run browserify() once
-    var bundler = watch ? watchify(browserify(props)) : browserify(props);
-
-    function rebundle() {
-        var stream = bundler.bundle();
-        return stream
-        .pipe(source('index.js'))
-        .pipe(gulp.dest('webroot/dist/'));
-    }
-
-    bundler.on('update', function () {
-        rebundle();
-        gutil.log('Rebundle...');
-    });
-
-    return rebundle();
-}
-
-gulp.task('scripts', function () {
+gulp.task('scripts', () => {
     return buildScript(paths.scripts, false);
 });
 
-gulp.task('watch', function() {
+gulp.task('watch', () => {
     gulp.watch(paths.styles, ['styles']);
-    gulp.watch(paths.scripts, ['scripts']);
-    gulp.watch(paths.components, ['scripts']);
+    bundle(paths.scripts, true);
 });
 
 gulp.task('default', ['scripts', 'styles']);
