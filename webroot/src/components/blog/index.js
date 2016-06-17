@@ -5,6 +5,7 @@
 import React from 'react';
 import request from 'superagent';
 import Loop from '../elements/loop';
+import Api from '../../helpers/api';
 
 var Blog = React.createClass({
     getInitialState: function () {
@@ -13,7 +14,7 @@ var Blog = React.createClass({
     componentWillMount: function () {
         var self = this;
         request
-            .get('http://api.pura.mark.boom/wp-json/wp/v2/posts')
+            .get(Api.url + '/wp-json/wp/v2/posts')
             .end(function (err, res) {
                 var data = JSON.parse(res.text);
 
