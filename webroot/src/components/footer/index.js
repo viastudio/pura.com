@@ -5,6 +5,7 @@
 
 import React from 'react';
 import Navigation from '../elements/navigation';
+import Social from '../elements/social';
 
 var Footer = React.createClass({
 
@@ -16,6 +17,7 @@ var Footer = React.createClass({
                 </aside>
 
                 <Navigation navLocation="ancillary" />
+                <Social />
             </footer>
         )
     }
