@@ -4,15 +4,18 @@
 */
 
 import React from 'react';
+import Navigation from '../elements/navigation';
 
 var Footer = React.createClass({
 
     render: function () {
         return (
              <footer id="colophon" className="site-footer" role="contentinfo">
-                <div className="container">
+                <aside className="container">
                     Built by VIA Studio
-                </div>
+                </aside>
+
+                <Navigation navLocation="ancillary" />
             </footer>
         )
     }

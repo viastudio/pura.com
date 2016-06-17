@@ -1,6 +1,6 @@
 /*
-  PrimraryNav
-  <PrimraryNav/>
+  Navigation
+  <Navigation />
 */
 
 import React from 'react';
@@ -12,6 +12,7 @@ var Navigation = React.createClass({
     },
 
     componentWillMount: function () {
+        //TODO: env. detection
         var self = this;
         request
             .get('http://api.pura.natalie.boom/wp-json/wp-api-menus/v2/menu-locations/' + self.props.navLocation)
@@ -24,23 +25,18 @@ var Navigation = React.createClass({
 
     render: function () {
         var links = this.state.links;
+        var location = this.props.navLocation;
         return (
-            <div className="nav-container">
-                <div className="container">
-                    <nav id="site-navigation" className="main-navigation" role="navigation">
-                        <div className="menu-primary-container">
-                            <ul id="menu-primary" className="menu">
-                            {
-                                links.map(function(link) {
-                                    var childClass = link.children.length ? 'menu-item-has-children' : '';
-                                    return <li key={link.ID} className={childClass}><a href={link.url}>{link.title}</a></li>
-                                })
-                            }
-                            </ul>
-                        </div>
+                    <nav role="navigation" className={location}>
+                        <ul id="menu-primary" className="menu">
+                        {
+                            links.map(function(link) {
+                                var childClass = link.children.length ? 'menu-item-has-children' : '';
+                                return <li key={link.ID} className={childClass}><a href={link.url}>{link.title}</a></li>
+                            })
+                        }
+                        </ul>
                     </nav>
-                </div>
-            </div>
         )
     }
 });
