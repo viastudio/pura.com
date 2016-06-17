@@ -12,12 +12,14 @@ var Footer = React.createClass({
     render: function () {
         return (
              <footer id="colophon" className="site-footer" role="contentinfo">
-                <aside className="container">
-                    Built by VIA Studio
-                </aside>
+                <div className="container">
+                    <aside className="via_tag">
+                        Built by VIA Studio
+                    </aside>
 
-                <Navigation navLocation="ancillary" />
-                <Social />
+                    <Navigation navLocation="ancillary" />
+                    <Social />
+                </div>
             </footer>
         )
     }
