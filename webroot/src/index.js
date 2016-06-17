@@ -1,7 +1,6 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var request = require('superagent');
-
+import React from 'react';
+import ReactDOM from 'react-dom';
+import request from 'superagent';
 import { Router, Route, IndexRoute, Navigation, browserHistory } from 'react-router';
 import Header from './components/header';
 import Footer from './components/footer';
