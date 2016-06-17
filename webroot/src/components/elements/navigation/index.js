@@ -6,7 +6,7 @@
 import React from 'react';
 import request from 'superagent';
 
-var PrimraryNav = React.createClass({
+var Navigation = React.createClass({
     getInitialState: function() {
         return { links: [] };
     },
@@ -14,7 +14,7 @@ var PrimraryNav = React.createClass({
     componentWillMount: function () {
         var self = this;
         request
-            .get('http://api.pura.joel.boom/wp-json/wp-api-menus/v2/menu-locations/primary')
+            .get('http://api.pura.natalie.boom/wp-json/wp-api-menus/v2/menu-locations/' + self.props.navLocation)
             .end(function(err, res) {
                 var data = JSON.parse(res.text);
                 self.setState({ links: data });
@@ -45,4 +45,4 @@ var PrimraryNav = React.createClass({
     }
 });
 
-export default PrimraryNav;
+export default Navigation;

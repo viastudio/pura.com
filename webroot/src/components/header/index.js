@@ -4,7 +4,7 @@
 */
 
 import React from 'react';
-import PrimaryNav from '../elements/primary_navigation';
+import Navigation from '../elements/navigation';
 
 var Header = React.createClass({
 
@@ -19,7 +19,7 @@ var Header = React.createClass({
                         <h1 className="site-title"><a href="/" rel="home">api.pura.com</a></h1>
                     </div>
                 </div>
-                <PrimaryNav />
+                <Navigation navLocation="primary"/>
             </header>
         )
     }
