@@ -23,10 +23,15 @@ var mapOptions = {
     sourceRoot: '../../source/webroot/src'
 };
 
+var handleError = function (error) {
+    gutil.log(gutil.colors.red(error.toString()));
+    this.emit('end');
+};
+
 var bundle = (files, watch) => {
     var props = {
         entries: files,
-        debug : true,
+        debug: true,
         cache: {},
         packageCache: {},
         transform: [
@@ -38,6 +43,7 @@ var bundle = (files, watch) => {
     var rebundle = () => {
         return bundler
             .bundle()
+            .on('error', handleError)
             .pipe(source('index.js'))
             .pipe(buffer())
             .pipe(sourcemaps.init({loadMaps: true}))
@@ -58,12 +64,20 @@ gulp.task('styles', () => {
         .src(paths.styles)
         .pipe(sourcemaps.init())
         .pipe(less())
+        .on('error', handleError)
         .pipe(autoprefixer({
             browsers: ['last 2 versions']
         }))
+        .on('error', handleError)
         .pipe(concat('index.css'))
         .pipe(sourcemaps.write(mapOptions))
         .pipe(gulp.dest('webroot/dist/'));
+});
+
+gulp.task('copyfonts', function () {
+    return gulp
+        .src('./node_modules/font-awesome/fonts/**/*.*')
+        .pipe(gulp.dest('./webroot/dist/fonts'));
 });
 
 gulp.task('scripts', () => {
@@ -75,4 +89,4 @@ gulp.task('watch', () => {
     bundle(paths.scripts, true);
 });
 
-gulp.task('default', ['scripts', 'styles']);
+gulp.task('default', ['copyfonts', 'scripts', 'styles']);
