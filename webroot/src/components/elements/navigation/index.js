@@ -8,7 +8,7 @@ import request from 'superagent';
 import NavigationItem from '../navigation-item';
 
 var Navigation = React.createClass({
-    getInitialState: function() {
+    getInitialState: function () {
         return { links: [] };
     },
 
@@ -17,7 +17,7 @@ var Navigation = React.createClass({
         var self = this;
         request
             .get('http://api.pura.natalie.boom/wp-json/wp-api-menus/v2/menu-locations/' + self.props.navLocation)
-            .end(function(err, res) {
+            .end(function (err, res) {
                 var data = JSON.parse(res.text);
                 self.setState({ links: data });
             });
@@ -31,7 +31,7 @@ var Navigation = React.createClass({
                     <nav role="navigation" className={location}>
                         <ul id="menu-primary" className="menu">
                         {
-                            links.map(function(link) {
+                            links.map(function (link) {
                                 return <NavigationItem key={link.ID} url={link.url} title={link.title} />
                             })
                         }
