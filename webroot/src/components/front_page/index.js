@@ -7,15 +7,15 @@ import request from 'superagent';
 import Page from '../elements/page';
 
 var FrontPage = React.createClass({
-    getInitialState: function() {
+    getInitialState: function () {
         return { component: <div /> };
     },
 
     componentWillMount: function () {
         var self = this;
         request
-            .get('http://api.pura.joel.boom/wp-json/wp/v2/pages/6')
-            .end(function(err, res) {
+            .get('http://api.pura.mark.boom/wp-json/wp/v2/pages/6')
+            .end(function (err, res) {
                 var data = JSON.parse(res.text);
 
                 self.setState({ component: <Page data={ data } bodyClass="index" /> });
