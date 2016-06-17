@@ -13,7 +13,7 @@ import Blog from './components/blog';
 var App = React.createClass({
     render: function () {
         return (
-            <div className="page">
+            <div id="page">
                 <Header />
                 <main>
                     {this.props.children}
@@ -36,4 +36,4 @@ var routes = (
     </Router>
 )
 
-ReactDOM.render(routes, document.querySelector('#main'));
+ReactDOM.render(routes, document.querySelector('.body-wrap'));
