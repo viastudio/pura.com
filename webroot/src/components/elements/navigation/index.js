@@ -5,6 +5,7 @@
 
 import React from 'react';
 import request from 'superagent';
+import NavigationItem from '../navigation-item';
 
 var Navigation = React.createClass({
     getInitialState: function() {
@@ -31,8 +32,7 @@ var Navigation = React.createClass({
                         <ul id="menu-primary" className="menu">
                         {
                             links.map(function(link) {
-                                var childClass = link.children.length ? 'menu-item-has-children' : '';
-                                return <li key={link.ID} className={childClass}><a href={link.url}>{link.title}</a></li>
+                                return <NavigationItem key={link.ID} url={link.url} title={link.title} />
                             })
                         }
                         </ul>
