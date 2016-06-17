@@ -36,7 +36,7 @@ var App = React.createClass({
 * Routes
 */
 var routes = (
-    <Router>
+    <Router history={createBrowserHistory()}>
         <Route path="/" component={App}>
             <IndexRoute component={FrontPage} />
             <Route path="/blog" component={Blog} />
