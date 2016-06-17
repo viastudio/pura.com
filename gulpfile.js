@@ -35,7 +35,7 @@ var bundle = (files, watch) => {
         cache: {},
         packageCache: {},
         transform: [
-            babelify.configure({stage: 0})
+            babelify.configure({presets: ["es2015", "react"]})
         ]
     };
 

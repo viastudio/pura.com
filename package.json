@@ -1,7 +1,7 @@
 {
   "name": "Pura",
   "version": "1.0.0",
-  "description": "",
+  "description": "A React.js powered WordPress theme.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,15 +10,16 @@
     "type": "git",
     "url": "https://github.com/viastudio/pura.com"
   },
-  "description": "A React.js powered WordPress theme.",
   "author": "VIA Studio",
   "license": "ISC",
   "dependencies": {
-    "autobind-decorator": "1.3.2",
-    "babel": "5.8.23",
-    "babelify": "6.4.0",
+    "autobind-decorator": "1.3.3",
+    "babel": "6.5.2",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.5.0",
+    "babelify": "7.3.0",
     "bootstrap": "^3.3.6",
-    "browserify": "11.2.0",
+    "browserify": "13.0.1",
     "font-awesome": "^4.6.3",
     "gulp": "3.9.1",
     "gulp-autoprefixer": "3.1.0",
@@ -26,20 +27,20 @@
     "gulp-less": "^3.0.5",
     "gulp-rename": "1.2.2",
     "gulp-sourcemaps": "^1.6.0",
-    "gulp-uglify": "1.4.2",
+    "gulp-uglify": "1.5.3",
     "gulp-util": "3.0.7",
-    "history": "1.12.5",
-    "install": "0.1.8",
-    "re-base": "1.2.1",
-    "react": "0.14.0",
-    "react-addons-css-transition-group": "0.14.0",
+    "history": "3.0.0",
+    "install": "0.8.1",
+    "re-base": "1.5.1",
+    "react": "^15.1.0",
+    "react-addons-css-transition-group": "15.1.0",
     "react-catalyst": "0.3.0",
-    "react-dom": "0.14.0",
-    "react-mixin": "3.0.0",
-    "react-router": "1.0.0-rc3",
-    "superagent": "^1.8.3",
+    "react-dom": "^15.1.0",
+    "react-mixin": "3.0.5",
+    "react-router": "2.4.1",
+    "superagent": "^2.0.0",
     "vinyl-buffer": "1.0.0",
     "vinyl-source-stream": "1.1.0",
-    "watchify": "3.4.0"
+    "watchify": "3.7.0"
   }
 }
