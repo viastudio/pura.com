@@ -1,14 +1,7 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var request = require('superagent');
-
-var ReactRouter = require('react-router');
-var Router  = ReactRouter.Router;
-var Route = ReactRouter.Route;
-var IndexRoute = ReactRouter.IndexRoute;
-var Navigation = ReactRouter.Navigation;
-var createBrowserHistory = require('history/lib/createBrowserHistory');
-
+import React from 'react';
+import ReactDOM from 'react-dom';
+import request from 'superagent';
+import { Router, Route, IndexRoute, Navigation, browserHistory } from 'react-router';
 import Header from './components/header';
 import Footer from './components/footer';
 import FrontPage from './components/front_page';
@@ -18,7 +11,6 @@ import Blog from './components/blog';
 * App
 */
 var App = React.createClass({
-
     render: function () {
         return (
             <div className="page">
@@ -36,7 +28,7 @@ var App = React.createClass({
 * Routes
 */
 var routes = (
-    <Router history={createBrowserHistory()}>
+    <Router history={browserHistory}>
         <Route path="/" component={App}>
             <IndexRoute component={FrontPage} />
             <Route path="/blog" component={Blog} />
