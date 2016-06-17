@@ -5,6 +5,7 @@
 
 import React from 'react';
 import Navigation from '../elements/navigation';
+import { Link } from 'react-router';
 
 var Header = React.createClass({
 
@@ -16,7 +17,7 @@ var Header = React.createClass({
                         <button type="button" className="menu-button" href="#"><span className="sr-only">Open Menu</span><i className="fa fa-bars"></i></button>
                     </nav>
                     <div className="site-branding">
-                        <h1 className="site-title"><a href="/" rel="home">api.pura.com</a></h1>
+                        <h1 className="site-title"><Link to="/" rel="home">api.pura.com</Link></h1>
                     </div>
                 </div>
                 <Navigation navLocation="primary"/>
