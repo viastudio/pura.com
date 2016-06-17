@@ -23,3 +23,24 @@ body {
         .make-sm-column(4);
     }
 }
+
+@time: .5s;
+@easing: ease-in-out;
+
+.main-enter {
+    transition: opacity @time @easing;
+    opacity: 0;
+}
+
+.main-enter.main-enter-active {
+    opacity: 1;
+}
+
+.main-leave {
+    transition: opacity @time @easing;
+    opacity: 1;
+}
+
+.main-leave.main-leave-active {
+    opacity: 0;
+}

@@ -85,7 +85,7 @@ gulp.task('scripts', () => {
 });
 
 gulp.task('watch', () => {
-    gulp.watch(paths.styles, ['styles']);
+    gulp.watch('webroot/src/**/*.less', ['styles']);
     bundle(paths.scripts, true);
 });
 

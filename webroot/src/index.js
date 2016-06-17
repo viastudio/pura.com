@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import request from 'superagent';
 import { Router, Route, IndexRoute, Navigation, browserHistory } from 'react-router';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import request from 'superagent';
 import Header from './components/header';
 import Footer from './components/footer';
 import FrontPage from './components/front_page';
@@ -15,9 +16,17 @@ var App = React.createClass({
         return (
             <div id="page">
                 <Header />
-                <main>
-                    {this.props.children}
-                </main>
+                <ReactCSSTransitionGroup
+                    component="main"
+                    className="page-wrap"
+                    transitionName="main"
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={500}
+                >
+                    {React.cloneElement(this.props.children, {
+                        key: location.pathname
+                    })}
+                </ReactCSSTransitionGroup>
                 <Footer />
             </div>
         )
