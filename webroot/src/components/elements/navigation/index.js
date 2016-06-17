@@ -4,6 +4,7 @@
 */
 
 import React from 'react';
+import Api from '../../../helpers/api';
 import request from 'superagent';
 import NavigationItem from '../navigation-item';
 
@@ -13,10 +14,9 @@ var Navigation = React.createClass({
     },
 
     componentWillMount: function () {
-        //TODO: env. detection
         var self = this;
         request
-            .get('http://api.pura.natalie.boom/wp-json/wp-api-menus/v2/menu-locations/' + self.props.navLocation)
+            .get(Api.url + '/wp-json/wp-api-menus/v2/menu-locations/' + self.props.navLocation)
             .end(function (err, res) {
                 var data = JSON.parse(res.text);
                 self.setState({ links: data });
