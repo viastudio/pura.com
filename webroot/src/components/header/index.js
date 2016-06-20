@@ -20,7 +20,9 @@ var Header = React.createClass({
                         <h1 className="site-title"><Link to="/" rel="home">api.pura.com</Link></h1>
                     </div>
                 </div>
-                <Navigation navLocation="primary"/>
+                <div className="container">
+                    <Navigation navLocation="primary"/>
+                </div>
             </header>
         )
     }

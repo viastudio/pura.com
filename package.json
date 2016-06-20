@@ -33,7 +33,7 @@
     "install": "0.8.1",
     "re-base": "1.5.1",
     "react": "^15.1.0",
-    "react-addons-css-transition-group": "15.1.0",
+    "react-addons-css-transition-group": "^15.1.0",
     "react-catalyst": "0.3.0",
     "react-dom": "^15.1.0",
     "react-mixin": "3.0.5",
