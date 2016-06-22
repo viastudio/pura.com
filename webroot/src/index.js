@@ -12,10 +12,20 @@ import Blog from './components/blog';
 * App
 */
 var App = React.createClass({
+    getInitialState() {
+        return {
+            menu: false
+        };
+    },
+    toggleMenu(e) {
+        this.setState({
+            menu: !this.state.menu
+        });
+    },
     render: function () {
         return (
-            <div id="page">
-                <Header />
+            <div id="page" className={this.state.menu ? 'menu-active' : ''} onChange={this.toggleMenu}>
+                <Header menuTransform={this.toggleMenu} />
                 <ReactCSSTransitionGroup
                     component="main"
                     className="page-wrap"

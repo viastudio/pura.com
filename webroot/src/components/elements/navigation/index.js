@@ -28,15 +28,13 @@ var Navigation = React.createClass({
         var links = this.state.links;
         var location = this.props.navLocation;
         return (
-            <nav role="navigation" className={location}>
-                <ul id="menu-primary" className="menu">
+                <ul id="menu-primary" className={location}>
                 {
                     links.map(function (link) {
                         return <NavigationItem key={link.ID} url={link.url} title={link.title} />
                     })
                 }
                 </ul>
-            </nav>
         )
     }
 });
