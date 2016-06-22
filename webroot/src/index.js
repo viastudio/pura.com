@@ -7,6 +7,7 @@ import Header from './components/header';
 import Footer from './components/footer';
 import FrontPage from './components/front_page';
 import Blog from './components/blog';
+import AbstractPage from './components/abstract_page';
 
 /*
 * App
@@ -41,6 +42,7 @@ var routes = (
         <Route path="/" component={App}>
             <IndexRoute component={FrontPage} />
             <Route path="/blog" component={Blog} />
+            <Route path="/:page_slug" component={AbstractPage} />
         </Route>
     </Router>
 )
