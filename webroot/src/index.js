@@ -8,6 +8,7 @@ import Footer from './components/footer';
 import FrontPage from './components/front_page';
 import Blog from './components/blog';
 import AbstractPage from './components/abstract_page';
+import Api from './helpers/api';
 
 /*
 * App
@@ -15,7 +16,8 @@ import AbstractPage from './components/abstract_page';
 var App = React.createClass({
     getInitialState() {
         return {
-            menu: false
+            menu: false,
+            bloginfo: []
         };
     },
     toggleMenu(e) {
@@ -23,10 +25,20 @@ var App = React.createClass({
             menu: !this.state.menu
         });
     },
+    componentDidMount() {
+        var self = this;
+        request
+            .get(Api.url + '/wp-json/rest-functions/v1/bloginfo/')
+            .end(function (err, res) {
+                console.log(res);
+                var data = JSON.parse(res.text);
+                self.setState({ bloginfo: data.data});
+            });
+    },
     render: function () {
         return (
             <div id="page" className={this.state.menu ? 'menu-active' : ''} onChange={this.toggleMenu}>
-                <Header menuTransform={this.toggleMenu} />
+                <Header menuTransform={this.toggleMenu} bloginfo={this.state.bloginfo} />
                 <ReactCSSTransitionGroup
                     component="main"
                     className="page-wrap"
