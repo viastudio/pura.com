@@ -8,7 +8,9 @@ var Page = React.createClass({
 
     render: function () {
         var details = this.props.data;
-
+        if (details.title === undefined) {
+            details = details.data;
+        }
         return (
             <div>
                 <h1 className="page-title">
