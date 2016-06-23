@@ -15,12 +15,11 @@ var Navigation = React.createClass({
 
     componentWillMount: function () {
         var self = this;
-        request
-            .get(Api.url + '/wp-json/wp-api-menus/v2/menu-locations/' + self.props.navLocation)
+        Api.Menu(self.props.navLocation)
             .end(function (err, res) {
-                var data = JSON.parse(res.text);
-                self.setState({ links: data });
-            });
+                    var data = JSON.parse(res.text);
+                    self.setState({ links: data });
+        });
     },
 
 
