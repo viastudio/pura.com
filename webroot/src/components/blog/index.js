@@ -9,7 +9,7 @@ import Api from '../../helpers/api';
 
 var Blog = React.createClass({
     getInitialState: function () {
-        return { component: <div /> };
+        return { data: [] };
     },
     componentWillMount: function () {
         var self = this;
@@ -18,12 +18,19 @@ var Blog = React.createClass({
             .end(function (err, res) {
                 var data = JSON.parse(res.text);
 
-                self.setState({ component: <Loop data={ data } bodyClass="blog" /> });
+                self.setState({data: data});
             });
     },
 
     render: function () {
-        return this.state.component;
+        return (
+            <div className="container">
+                <header className="page-header">
+                    <h1 className="page-title">Archives</h1>
+                </header>
+                <Loop data={ this.state.data } bodyClass="blog" />
+            </div>
+        )
     }
 });
 

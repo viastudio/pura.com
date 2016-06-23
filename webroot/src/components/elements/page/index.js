@@ -13,13 +13,15 @@ var Page = React.createClass({
             details = details.data;
         }
         return (
-            <div>
+            <article id={'post-' + details.ID} className="container page">
                 <Helmet title={details.title.rendered} />
-                <h1 className="page-title">
-                    {details.title.rendered}
-                </h1>
+                <header class="entry-header">
+                    <h1 className="page-title">
+                        {details.title.rendered}
+                    </h1>
+                </header>
                 <div className="entry-content" dangerouslySetInnerHTML={{__html: details.content.rendered}} />
-            </div>
+            </article>
         )
     }
 });
