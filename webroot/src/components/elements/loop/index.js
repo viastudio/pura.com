@@ -17,10 +17,18 @@ var Loop = React.createClass({
                     function createExcerpt() {
                         return {__html: post.excerpt.rendered};
                     };
-                    return <div key={post.title.rendered}>
-                        <h2><Link to={'/blog/' + post.id}>{post.title.rendered}</Link></h2>
-                        <div dangerouslySetInnerHTML={createExcerpt()} />
-                    </div>
+                    return (
+                        <article id={'post-' + post.id} key={post.title.rendered} className="archive-article">
+                            <header className="entry-header">
+                                <h2 className="entry-title">
+                                    <Link to={'/blog/' + post.id}>{post.title.rendered}</Link>
+                                </h2>
+                            </header>
+                            <div className="entry-summary">
+                                <div dangerouslySetInnerHTML={createExcerpt()} />
+                            </div>
+                        </article>
+                    )
                 })}
             </div>
         )
