@@ -4,6 +4,7 @@
    */
 import React from 'react';
 import { Link } from 'react-router';
+import Helmet from 'react-helmet';
 
 var Loop = React.createClass({
 
@@ -11,6 +12,7 @@ var Loop = React.createClass({
         var posts = this.props.data;
         return (
             <div>
+                <Helmet title="Blog" />
                 {posts.map(function (post) {
                     function createExcerpt() {
                         return {__html: post.excerpt.rendered};

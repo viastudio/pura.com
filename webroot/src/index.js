@@ -9,6 +9,7 @@ import FrontPage from './components/front_page';
 import Blog from './components/blog';
 import AbstractPage from './components/abstract_page';
 import Api from './helpers/api';
+import Helmet from "react-helmet";
 
 /*
 * App
@@ -30,7 +31,6 @@ var App = React.createClass({
         request
             .get(Api.url + '/wp-json/rest-functions/v1/bloginfo/')
             .end(function (err, res) {
-                console.log(res);
                 var data = JSON.parse(res.text);
                 self.setState({ bloginfo: data.data});
             });
@@ -38,6 +38,9 @@ var App = React.createClass({
     render: function () {
         return (
             <div id="page" className={this.state.menu ? 'menu-active' : ''} onChange={this.toggleMenu}>
+                <Helmet
+                    titleTemplate={this.state.bloginfo.name + " | %s"}
+                />
                 <Header menuTransform={this.toggleMenu} bloginfo={this.state.bloginfo} />
                 <ReactCSSTransitionGroup
                     component="main"

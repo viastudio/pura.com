@@ -3,6 +3,7 @@
   <Page/>
 */
 import React from 'react';
+import Helmet from 'react-helmet';
 
 var Page = React.createClass({
 
@@ -13,6 +14,7 @@ var Page = React.createClass({
         }
         return (
             <div>
+                <Helmet title={details.title.rendered} />
                 <h1 className="page-title">
                     {details.title.rendered}
                 </h1>
