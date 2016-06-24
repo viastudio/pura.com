@@ -7,7 +7,7 @@ var Api = (function (parent) {
     var self = parent = parent || {};
     var menus = '/wp-json/wp-api-menus/v2/menu-locations/';
     var pages = '/wp-json/rest-functions/v1/pages/';
-    var posts = '/wp-json/wp/v2/posts';
+    var posts = '/wp-json/wp/v2/posts/';
 
     (function (url) {
         self.url = 'http://api.pura.' + url.hostname.split('.').splice(1).join('.');
@@ -21,6 +21,11 @@ var Api = (function (parent) {
     self.Page = function (slug) {
         return (
             request.get(self.url + pages + slug)
+        )
+    }
+    self.Post = function (id) {
+        return (
+            request.get(self.url + posts + id)
         )
     }
 
