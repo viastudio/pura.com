@@ -14,7 +14,6 @@ var AbstractPage = React.createClass({
     componentWillMount: function () {
         var self = this;
         var page_slug = self.props.params.page_slug;
-
         Api
             .Page(page_slug)
             .end(function (err, res) {
