@@ -46,7 +46,6 @@ var bundle = (files, watch) => {
             .on('error', handleError)
             .pipe(source('index.js'))
             .pipe(buffer())
-            .pipe(sourcemaps.init({loadMaps: true}))
             .pipe(sourcemaps.write(mapOptions))
             .pipe(gulp.dest('webroot/dist/'));
     };

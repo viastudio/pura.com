@@ -3,7 +3,6 @@
   <FrontPage/>
 */
 import React from 'react';
-import request from 'superagent';
 import Page from '../elements/page';
 import Api from '../../helpers/api';
 
@@ -13,15 +12,11 @@ var FrontPage = React.createClass({
     },
 
     componentWillMount: function () {
-        var self = this;
-        request
-        //Todo: static front page?
-            .get(Api.url + '/wp-json/wp/v2/pages/6')
-            .end(function (err, res) {
-                var data = JSON.parse(res.text);
-
-                self.setState({ component: <Page data={ data } bodyClass="index" /> });
-            });
+        let self = this;
+        Api.FrontPage().end((err, res) => {
+            var data = res.body;
+            self.setState({ component: <Page data={ data.data } bodyClass="index" /> });
+        });
     },
 
     render: function () {
