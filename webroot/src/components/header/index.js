@@ -25,7 +25,7 @@ var Header = React.createClass({
                             <button type="button" className="menu-button menu-close" onClick={this.props.menuTransform} href="#"><span className="sr-only">Close Menu</span><i className="fa fa-times"></i></button>
                         </div>
                         <nav id="site-navigation" className="main-navigation" role="navigation">
-                            <Navigation navLocation="primary"/>
+                            <Navigation navId="menu-primary" navLocation="primary"/>
                         </nav>
                     </div>
                 </div>

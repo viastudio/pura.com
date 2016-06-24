@@ -30,7 +30,7 @@ var Navigation = React.createClass({
                 <ul id="menu-primary" className={location}>
                 {
                     links.map(function (link) {
-                        return <NavigationItem key={link.ID} url={link.url} title={link.title} />
+                        return <NavigationItem key={link.ID} url={link.url} title={link.title} children={link.children}/>
                     })
                 }
                 </ul>
