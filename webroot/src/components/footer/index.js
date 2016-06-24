@@ -6,7 +6,6 @@
 import React from 'react';
 import Navigation from '../elements/navigation';
 import IconList from '../elements/icon-list';
-import request from 'superagent';
 import Address from '../elements/address';
 import Api from '../../helpers/api';
 
@@ -20,11 +19,11 @@ var Footer = React.createClass({
     },
     componentWillMount: function () {
         var self = this;
-        request
-            .get(Api.url + '/wp-json/rest-functions/v1/theme-options')
+        Api.ThemeOptions()
             .end(function (err, res) {
                 var data = res.body;
-                var social = [{
+                var social = [
+                    {
                         title: 'Facebook',
                         icon: 'fa fa-facebook',
                         link: data.data.theme_option_facebook_txt_input
@@ -55,7 +54,8 @@ var Footer = React.createClass({
                         link: data.data.theme_option_linkedin_txt_input
                     }
                 ];
-                var contact = [{
+                var contact = [
+                    {
                         icon: "fa fa-phone",
                         title: data.data.theme_option_phone_txt_input,
                         link: 'tel:' + data.data.theme_option_phone_txt_input
@@ -64,8 +64,8 @@ var Footer = React.createClass({
                         icon: "fa fa-envelope",
                         title: data.data.theme_option_email_txt_input,
                         link: 'mailto:' + data.data.theme_option_email_txt_input
-
-                }];
+                    }
+                ];
                 var address = {
                     street: data.data.theme_option_street_txt_input,
                     city: data.data.theme_option_city_txt_input,
