@@ -1,0 +1,1 @@
+[API Endpoint documentation](https://github.com/viastudio/api.pura.com/tree/master/wp-content/plugins/rest-functions/README.md)
