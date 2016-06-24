@@ -23,7 +23,7 @@ var Footer = React.createClass({
         request
             .get(Api.url + '/wp-json/rest-functions/v1/theme-options')
             .end(function (err, res) {
-                var data = JSON.parse(res.text);
+                var data = res.body;
                 var social = [{
                         title: 'Facebook',
                         icon: 'fa fa-facebook',

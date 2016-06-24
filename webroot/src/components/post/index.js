@@ -21,7 +21,7 @@ var Post = React.createClass({
         Api
             .Post(self.props.params.id)
             .end(function (err, res) {
-                var data = JSON.parse(res.text);
+                var data = res.body;
                 self.setState({
                     data: data,
                     title: data.title.rendered,
