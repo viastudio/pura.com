@@ -17,7 +17,7 @@ var AbstractPage = React.createClass({
         Api
             .Page(page_slug)
             .end(function (err, res) {
-                var data = JSON.parse(res.text);
+                var data = res.body;
                 self.setState({ component: <Page data={ data } bodyClass="single-page" />});
             });
     },

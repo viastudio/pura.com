@@ -15,8 +15,7 @@ var Blog = React.createClass({
         Api
             .Posts()
             .end(function (err, res) {
-                var data = JSON.parse(res.text);
-
+                var data = res.body;
                 self.setState({data: data});
             });
     },

@@ -17,7 +17,7 @@ var Navigation = React.createClass({
         var self = this;
         Api.Menu(self.props.navLocation)
             .end(function (err, res) {
-                var data = JSON.parse(res.text);
+                var data = res.body;
                 self.setState({ links: data });
         });
     },
