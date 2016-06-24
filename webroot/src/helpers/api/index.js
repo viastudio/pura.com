@@ -28,8 +28,8 @@ var Api = (function (parent) {
         return request.get(self.url + posts + id)
     };
 
-    self.Posts = function () {
-        return request.get(self.url + posts);
+    self.Posts = function (page, per_page) {
+        return request.get(self.url + posts + '?page=' + page + '&per_page=' + per_page);
     };
 
     self.ThemeOptions = () => {
