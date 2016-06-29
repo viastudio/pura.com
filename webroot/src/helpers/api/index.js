@@ -10,6 +10,8 @@ var Api = (function (parent) {
     var posts = '/wp-json/wp/v2/posts/';
     var frontPage = '/wp-json/rest-functions/v1/homepage';
     var themeOptions = '/wp-json/rest-functions/v1/theme-options';
+    var blogInfo = '/wp-json/rest-functions/v1/bloginfo/';
+    var sidebars = '/wp-json/wp-rest-api-sidebars/v1/sidebars/';
     self.url = 'http://api.pura.' + window.location.hostname.split('.').splice(1).join('.');
 
     self.Menu = function (location) {
@@ -34,6 +36,14 @@ var Api = (function (parent) {
 
     self.ThemeOptions = () => {
         return request.get(self.url + themeOptions);
+    };
+
+    self.BlogInfo = () => {
+        return request.get(self.url + blogInfo);
+    };
+
+    self.Sidebar = (slug) => {
+        return request.get(self.url + sidebars + slug);
     };
 
     return self;

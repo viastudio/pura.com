@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute, Navigation, browserHistory } from 'react-router';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import request from 'superagent';
 import Header from './components/header';
 import Footer from './components/footer';
 import FrontPage from './components/front_page';
@@ -29,12 +28,10 @@ var App = React.createClass({
     },
     componentDidMount() {
         var self = this;
-        request
-            .get(Api.url + '/wp-json/rest-functions/v1/bloginfo/')
-            .end(function (err, res) {
-                var data = JSON.parse(res.text);
-                self.setState({ bloginfo: data.data});
-            });
+        Api.BlogInfo().end(function (err, res) {
+            var data = res.body;
+            self.setState({ bloginfo: data.data});
+        });
     },
     render: function () {
         return (
