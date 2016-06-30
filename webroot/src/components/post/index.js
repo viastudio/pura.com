@@ -13,7 +13,8 @@ var Post = React.createClass({
         return {
             data: "",
             title: "",
-            content: ""
+            content: "",
+            image: ""
         }
     },
 
@@ -26,7 +27,8 @@ var Post = React.createClass({
                 self.setState({
                     data: data,
                     title: data.title.rendered,
-                    content: data.content.rendered
+                    content: data.content.rendered,
+                    image: data.featured_image
                 })
             });
     },
@@ -39,6 +41,10 @@ var Post = React.createClass({
                     <header className="entry-header">
                         <h1 className="entry-title" dangerouslySetInnerHTML={{__html: this.state.title }} />
                     </header>
+                    {this.state.image &&
+                        <div className="featured-image" dangerouslySetInnerHTML={{__html: this.state.image}} />
+                    }
+
                     <div className="entry-content" dangerouslySetInnerHTML={{__html: this.state.content }} />
                 </div>
                 <Sidebar slug="post-sidebar" />
