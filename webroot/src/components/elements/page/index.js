@@ -20,8 +20,8 @@ var Page = React.createClass({
                         {details.title.rendered}
                     </h1>
                 </header>
-                {details.featured_image_tag &&
-                    <div className="featured-image" dangerouslySetInnerHTML={{__html: details.featured_image_tag}} />
+                {details.featured_image &&
+                    <div className="featured-image" dangerouslySetInnerHTML={{__html: details.featured_image}} />
                 }
 
                 <div className="entry-content" dangerouslySetInnerHTML={{__html: details.content.rendered}} />
