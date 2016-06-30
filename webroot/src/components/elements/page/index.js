@@ -13,7 +13,7 @@ var Page = React.createClass({
             details = details.data;
         }
         return (
-            <article id={'post-' + details.ID} className="container page">
+            <article id={'post-' + details.id} className="container page">
                 <Helmet title={details.title.rendered} />
                 <header class="entry-header">
                     <h1 className="page-title">
