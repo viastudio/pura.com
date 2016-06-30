@@ -20,7 +20,7 @@ var Post = React.createClass({
     componentWillMount: function () {
         var self = this;
         Api
-            .Post(self.props.params.id)
+            .Post(self.props.params.slug)
             .end(function (err, res) {
                 var data = res.body;
                 self.setState({

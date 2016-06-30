@@ -8,6 +8,7 @@ var Api = (function (parent) {
     var menus = '/wp-json/wp-api-menus/v2/menu-locations/';
     var pages = '/wp-json/rest-functions/v1/pages/';
     var posts = '/wp-json/wp/v2/posts/';
+    var post = '/wp-json/rest-functions/v1/posts/';
     var frontPage = '/wp-json/rest-functions/v1/homepage';
     var themeOptions = '/wp-json/rest-functions/v1/theme-options';
     var blogInfo = '/wp-json/rest-functions/v1/bloginfo/';
@@ -26,8 +27,8 @@ var Api = (function (parent) {
         return request.get(self.url + frontPage);
     };
 
-    self.Post = function (id) {
-        return request.get(self.url + posts + id)
+    self.Post = function (slug) {
+        return request.get(self.url + post + slug)
     };
 
     self.Posts = function (page, per_page) {
