@@ -15,7 +15,7 @@ var FrontPage = React.createClass({
         let self = this;
         Api.FrontPage().end((err, res) => {
             var data = res.body;
-            self.setState({ component: <Page data={ data.data } bodyClass="index" /> });
+            self.setState({ component: <Page data={ data } bodyClass="index" /> });
         });
     },
 
