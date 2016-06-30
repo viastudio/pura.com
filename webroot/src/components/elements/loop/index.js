@@ -21,7 +21,7 @@ var Loop = React.createClass({
                         <article id={'post-' + post.id} key={post.title.rendered} className="archive-article">
                             <header className="entry-header">
                                 <h2 className="entry-title">
-                                    <Link to={'/blog/' + post.id}>{post.title.rendered}</Link>
+                                    <Link to={'/blog/' + post.slug}>{post.title.rendered}</Link>
                                 </h2>
                             </header>
                             <div className="entry-summary">
