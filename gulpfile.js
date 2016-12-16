@@ -28,14 +28,14 @@ var handleError = function (error) {
 };
 
 function onBuild(done) {
-    return function(err, stats) {
+    return function (err, stats) {
         if (err) {
             gutil.log('Error', err);
             if (done) {
                 done();
             }
         } else {
-            Object.keys(stats.compilation.assets).forEach(function(key) {
+            Object.keys(stats.compilation.assets).forEach(function (key) {
                 gutil.log('Webpack: output ', gutil.colors.green(key));
             });
             if (done) {
@@ -46,28 +46,28 @@ function onBuild(done) {
 }
 
 gulp.task('webpack', function (done) {
-  webpack(webpackConfig).run(onBuild(done));
+    webpack(webpackConfig).run(onBuild(done));
 });
 
 gulp.task('styles', () => {
     return gulp
-        .src(paths.styles)
-        .pipe(sourcemaps.init())
-        .pipe(less())
-        .on('error', handleError)
-        .pipe(autoprefixer({
-            browsers: ['last 2 versions']
-        }))
-        .on('error', handleError)
-        .pipe(concat('index.css'))
-        .pipe(sourcemaps.write(mapOptions))
-        .pipe(gulp.dest('webroot/dist/css'));
+    .src(paths.styles)
+    .pipe(sourcemaps.init())
+    .pipe(less())
+    .on('error', handleError)
+    .pipe(autoprefixer({
+        browsers: ['last 2 versions']
+    }))
+    .on('error', handleError)
+    .pipe(concat('index.css'))
+    .pipe(sourcemaps.write(mapOptions))
+    .pipe(gulp.dest('webroot/dist/css'));
 });
 
 gulp.task('copyfonts', function () {
     return gulp
-        .src('./node_modules/font-awesome/fonts/**/*.*')
-        .pipe(gulp.dest('./webroot/dist/fonts'));
+    .src('./node_modules/font-awesome/fonts/**/*.*')
+    .pipe(gulp.dest('./webroot/dist/fonts'));
 });
 
 gulp.task('watch', () => {
