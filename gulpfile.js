@@ -1,9 +1,8 @@
 var source = require('vinyl-source-stream');
+var webpack = require('webpack');
+var webpackConfig = require('./webpack.config.js');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
-var browserify = require('browserify');
-var babelify = require('babelify');
-var watchify = require('watchify');
 var less = require('gulp-less');
 var path = require('path');
 var concat = require('gulp-concat');
@@ -14,7 +13,7 @@ var buffer = require('vinyl-buffer');
 var sourcemaps = require('gulp-sourcemaps');
 
 var paths = {
-    scripts: ['webroot/src/index.js'],
+    scripts: ['webroot/src/**/*js'],
     styles: ['webroot/src/index.less']
 };
 
@@ -28,64 +27,52 @@ var handleError = function (error) {
     this.emit('end');
 };
 
-var bundle = (files, watch) => {
-    var props = {
-        entries: files,
-        debug: true,
-        cache: {},
-        packageCache: {},
-        transform: [
-            babelify.configure({presets: ["es2015", "react"]})
-        ]
-    };
+function onBuild(done) {
+    return function (err, stats) {
+        if (err) {
+            gutil.log('Error', err);
+            if (done) {
+                done();
+            }
+        } else {
+            Object.keys(stats.compilation.assets).forEach(function (key) {
+                gutil.log('Webpack: output ', gutil.colors.green(key));
+            });
+            if (done) {
+                done();
+            }
+        }
+    }
+}
 
-    var bundler = watch ? watchify(browserify(props)) : browserify(props);
-    var rebundle = () => {
-        return bundler
-            .bundle()
-            .on('error', handleError)
-            .pipe(source('index.js'))
-            .pipe(buffer())
-            .pipe(sourcemaps.write(mapOptions))
-            .pipe(gulp.dest('webroot/dist/'));
-    };
-
-    bundler.on('update', (ids) => {
-        rebundle();
-        gutil.log('Updated', gutil.colors.cyan(ids));
-    });
-
-    return rebundle();
-};
+gulp.task('webpack', function (done) {
+    webpack(webpackConfig).run(onBuild(done));
+});
 
 gulp.task('styles', () => {
     return gulp
-        .src(paths.styles)
-        .pipe(sourcemaps.init())
-        .pipe(less())
-        .on('error', handleError)
-        .pipe(autoprefixer({
-            browsers: ['last 2 versions']
-        }))
-        .on('error', handleError)
-        .pipe(concat('index.css'))
-        .pipe(sourcemaps.write(mapOptions))
-        .pipe(gulp.dest('webroot/dist/'));
+    .src(paths.styles)
+    .pipe(sourcemaps.init())
+    .pipe(less())
+    .on('error', handleError)
+    .pipe(autoprefixer({
+        browsers: ['last 2 versions']
+    }))
+    .on('error', handleError)
+    .pipe(concat('index.css'))
+    .pipe(sourcemaps.write(mapOptions))
+    .pipe(gulp.dest('webroot/dist/css'));
 });
 
 gulp.task('copyfonts', function () {
     return gulp
-        .src('./node_modules/font-awesome/fonts/**/*.*')
-        .pipe(gulp.dest('./webroot/dist/fonts'));
-});
-
-gulp.task('scripts', () => {
-    return bundle(paths.scripts, false);
+    .src('./node_modules/font-awesome/fonts/**/*.*')
+    .pipe(gulp.dest('./webroot/dist/fonts'));
 });
 
 gulp.task('watch', () => {
     gulp.watch('webroot/src/**/*.less', ['styles']);
-    bundle(paths.scripts, true);
+    gulp.watch(paths.scripts, ['webpack']);
 });
 
-gulp.task('default', ['copyfonts', 'scripts', 'styles']);
+gulp.task('default', ['copyfonts', 'webpack', 'styles']);

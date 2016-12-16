@@ -15,7 +15,7 @@ var Page = React.createClass({
         return (
             <article id={'post-' + details.id} className="container page">
                 <Helmet title={details.title.rendered} />
-                <header class="entry-header">
+                <header className="entry-header">
                     <h1 className="page-title">
                         {details.title.rendered}
                     </h1>
