@@ -6,6 +6,7 @@ var APP_DIR = path.resolve(__dirname, 'webroot/src/');
 
 var config = {
     entry: APP_DIR + '/index.js',
+    bail: true,
     output: {
         path: BUILD_DIR,
         filename: 'bundle.js'
